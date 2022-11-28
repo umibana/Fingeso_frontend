@@ -7,22 +7,6 @@
     <!--   fixed -->
     <!--   app -->
     <!-- > -->
-    <!--   <v-list> -->
-    <!--     <v-list-item -->
-    <!--       v-for="(item, i) in items" -->
-    <!--       :key="i" -->
-    <!--       :to="item.to" -->
-    <!--       router -->
-    <!--       exact -->
-    <!--     > -->
-    <!--       <v-list-item-action> -->
-    <!--         <v-icon>{{ item.icon }}</v-icon> -->
-    <!--       </v-list-item-action> -->
-    <!--       <v-list-item-content> -->
-    <!--         <v-list-item-title>{{ item.title }}</v-list-item-title> -->
-    <!--       </v-list-item-content> -->
-    <!--     </v-list-item> -->
-    <!--   </v-list> -->
     <!-- </v-navigation-drawer> -->
     <v-app-bar class="rounded-pill mt-3 ml-6 mr-6" dark fixed app>
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
@@ -37,16 +21,27 @@
       <!--   <v-icon>mdi-minus</v-icon> -->
       <!-- </v-btn> -->
       <!-- <v-toolbar-title>{{ title }}</v-toolbar-title> -->
-      <v-btn> Inicio </v-btn>
+
       <v-spacer />
+      <v-btn
+        v-for="(item, i) in items"
+        :key="i"
+        :to="item.to"
+        light
+        router
+        exact
+        class="ma-6"
+      >
+        {{ item.title }}
+      </v-btn>
       <v-spacer />
-      <v-btn> Mis Compromisos </v-btn>
-      <v-spacer />
-      <v-btn> Evaluaciones Asignadas</v-btn>
-      <v-spacer />
-      <v-spacer />
-      <v-avatar> </v-avatar>
-      <v-toolbar-title class="pr-3">{{ username }}</v-toolbar-title>
+      <v-avatar color="white">
+        <span class="black--text">H.V</span>
+      </v-avatar>
+
+      <!-- <v-btn light :to="items[1].to"> Mis Compromisos </v-btn> -->
+      <!-- <v-btn light :to="items[2].to"> Evaluaciones Asignadas</v-btn> -->
+      <!-- <v-toolbar-title class="pr-3">{{ username }}</v-toolbar-title> -->
       <!-- <v-btn icon @click.stop="rightDrawer = !rightDrawer"> -->
       <!--   <v-icon>mdi-menu</v-icon> -->
       <!-- </v-btn> -->
@@ -83,18 +78,20 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/userDashboard',
+          title: 'Inicio',
+          to: '/index',
+        },
+        {
+          icon: 'mdi-apps',
+          title: 'Compromisos',
+          to: '/compromisos',
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Inspire',
+          title: 'Evaluaciones',
           to: '/inspire',
         },
       ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
       title: 'Vuetify.js',
       username: 'DIINF USACH',
     }
