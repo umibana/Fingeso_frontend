@@ -51,9 +51,8 @@
       <!--   <v-icon>mdi-menu</v-icon> -->
       <!-- </v-btn> -->
     </v-app-bar>
-    <v-main>
+    <v-main class="mt-3">
       <v-container>
-        <Nuxt />
         <Nuxt />
       </v-container>
     </v-main>

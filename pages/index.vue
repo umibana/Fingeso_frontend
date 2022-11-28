@@ -1,33 +1,43 @@
-
 <template>
   <v-app light class="login">
-
     <v-container fluid fill-height class="blurBG">
       <v-layout align-center>
         <v-flex md6 offset-md3>
-          <v-card elevation="4" class="blurCard" tag="section" >
+          <v-card elevation="4" class="blurCard" tag="section">
             <v-card-title>
               <v-layout align-center justify-space-between>
-                <h1 class="headline">
-                  SED USACH
-                </h1>
-                <v-img lazy-src="/logoUsach.png" max-height="150" max-width="250" src="/logoUsach.png"></v-img>
+                <h1 class="headline">SED USACH</h1>
+                <v-img
+                  lazy-src="/logoUsach.png"
+                  max-height="150"
+                  max-width="250"
+                  src="/logoUsach.png"
+                ></v-img>
               </v-layout>
             </v-card-title>
             <v-divider></v-divider>
             <v-card-text>
-              <p> Porfavor ingrese sus datos de acceso</p>
+              <p>Porfavor ingrese sus datos de acceso</p>
               <v-form>
-                <v-text-field v-model="username" outline label="Username" type="text"></v-text-field>
-                <v-text-field v-model="password" outline hide-details label="Password" type="password"></v-text-field>
+                <v-text-field
+                  v-model="username"
+                  outline
+                  label="Username"
+                  type="text"
+                ></v-text-field>
+                <v-text-field
+                  v-model="password"
+                  outline
+                  hide-details
+                  label="Password"
+                  type="password"
+                ></v-text-field>
               </v-form>
             </v-card-text>
             <v-divider></v-divider>
             <!-- Editar estas acciones una vez backend sea implementado -->
             <v-card-actions :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
-              <v-btn color="info">
-                ¿Olvidaste tu contraseña?
-              </v-btn>
+              <v-btn color="info"> ¿Olvidaste tu contraseña? </v-btn>
               <v-spacer></v-spacer>
               <v-btn color="info" :large="$vuetify.breakpoint.smAndUp">
                 <v-icon left> :=:</v-icon>
@@ -38,7 +48,6 @@
         </v-flex>
       </v-layout>
     </v-container>
-</div>
   </v-app>
 </template>
 
@@ -49,19 +58,15 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-.blurBG{
-
+.blurBG {
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-
 }
 
 .blurCard {
   opacity: 95%;
-
 }
 </style>
-
 
 <script>
 export default {
