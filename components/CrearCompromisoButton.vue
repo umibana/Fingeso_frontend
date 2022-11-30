@@ -14,6 +14,7 @@
           <v-row>
             <v-col cols="12" sm="9" md="9">
               <v-textarea
+                v-model="descripcion"
                 label="Descripción del compromiso a realizar"
                 solo
                 maxlength="500"
@@ -22,11 +23,8 @@
             </v-col>
             <v-col cols="12" sm="3">
               <v-select
-                :items="[
-                  'Docencia',
-                  'Investigación',
-                  'Vinculación con el medio',
-                ]"
+                v-model="tipo"
+                :items="items"
                 label="Categoría"
                 required
               ></v-select>
@@ -39,7 +37,15 @@
         <v-btn color="blue darken-1" text @click="dialog = false">
           Cerrar
         </v-btn>
-        <v-btn color="blue darken-1" text @click="dialog = false">
+        <v-btn
+          type="submit"
+          color="blue darken-1"
+          text
+          @click="
+            createCompromiso()
+            dialog = false
+          "
+        >
           Guardar
         </v-btn>
       </v-card-actions>
@@ -48,11 +54,29 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  data() {
-    return {
-      dialog: false,
-    }
+  data: () => ({
+    select: { text: 'Docencia', value: 0 },
+    items: [
+      { text: 'Docencia', value: 0 },
+      { text: 'Investigación', value: 1 },
+      { text: 'Vinculación con el medio', value: 2 },
+    ],
+    dialog: false,
+    descripcion: '',
+    tipo: 0,
+  }),
+  methods: {
+    createCompromiso: function () {
+      const compromisoPost = {
+        descripcion: this.descripcion,
+        tipo: this.tipo,
+      }
+      axios.post('/compromisos', compromisoPost).then((result) => {
+        console.log(result)
+      })
+    },
   },
 }
 </script>

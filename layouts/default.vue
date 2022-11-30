@@ -1,5 +1,5 @@
 <template>
-  <v-app light>
+  <v-app light class="back">
     <!-- <v-navigation-drawer -->
     <!--   v-model="drawer" -->
     <!--   :mini-variant="miniVariant" -->
@@ -61,7 +61,7 @@
     <!--     </v-list-item> -->
     <!--   </v-list> -->
     <!-- </v-navigation-drawer> -->
-    <v-footer :absolute="!fixed" app>
+    <v-footer :absolute="!fixed" dark app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
@@ -79,7 +79,7 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Inicio',
-          to: '/index',
+          to: '/',
         },
         {
           icon: 'mdi-apps',
@@ -98,3 +98,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.back {
+  background-color: #e3e3e3;
+}
+</style>

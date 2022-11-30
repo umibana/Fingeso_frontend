@@ -4,8 +4,8 @@
       v-for="(compromiso, i) in compromisos"
       :key="i"
       :numero="i + 1"
-      :categoria="compromiso.name"
-      :descripcion="test"
+      :categoria="compromiso.tipo"
+      :descripcion="compromiso.descripcion"
     >
     </CompromisoDatos>
 
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     getCompromisos: async function () {
-      const response = await axios.get('/User')
+      const response = await axios.get('/compromisos')
       this.compromisos = response.data
     },
   },
