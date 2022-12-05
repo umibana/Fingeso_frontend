@@ -4,6 +4,7 @@
       <v-card-title class="text-h5"> Compromiso {{ numero }} </v-card-title>
       <v-card-subtitle> Categoria: {{ categoria }} </v-card-subtitle>
       <v-card-text> {{ descripcion }} </v-card-text>
+      <UploadFile> </UploadFile>
     </v-card>
   </v-col>
 </template>
