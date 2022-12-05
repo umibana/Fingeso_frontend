@@ -20,13 +20,13 @@
               <p>Porfavor ingrese sus datos de acceso</p>
               <v-form>
                 <v-text-field
-                  v-model="formValues.email"
+                  v-model="formValues.mail"
                   outline
                   label="Email"
                   type="text"
                 ></v-text-field>
                 <v-text-field
-                  v-model="formValues.password"
+                  v-model="formValues.pass"
                   outline
                   hide-details
                   label="Password"
@@ -77,8 +77,8 @@ export default {
     return{
       users: [],
       formValues: {
-        password: '',
-        email: ''
+        pass: '',
+        mail: ''
       }
     }
   },
@@ -91,20 +91,21 @@ export default {
       this.users = response.data
       console.log(this.users[0].pass)
     },
-    loginHandler(){
-      if (this.formValues.email === '' || this.formValues.password === ''){
+    async loginHandler(){
+      if (this.formValues.mail === '' || this.formValues.pass === ''){
         alert("Complete todos los campos por favor")
       }else {
-        for (let i = 0; i < this.users.length; i++) {
-            if (this.formValues.email === this.users[i].mail){
-              if (this.formValues.password === this.users[i].pass){
-                location.href='compromisos'
-              }else {
-                alert("Contraseña incorrecta")
-              }
-            }else{
-              alert("Usuario no encontrado")
-            }
+        const response = await UserServices.matchUser(this.formValues);
+        console.log(response.data);
+        switch (response.data) {
+          case 0:
+            alert("Usuario no encontrado")
+            break
+          case -1:
+            alert("Contraseña incorrecta")
+            break
+          default:
+            location.href='compromisos'
         }
       }
     }
