@@ -70,7 +70,7 @@
 
 <script>
 import UserServices from "~/services/UserServices";
-import AcademicoServices from "~/services/AcademicoServices";
+// import AcademicoServices from "~/services/AcademicoServices";
 export default {
   name: 'IndexPage',
   layout: 'empty',
@@ -85,20 +85,13 @@ export default {
     }
   },
   created() {
-    this.getUsersHandler()
   },
   methods:{
-    async getUsersHandler(){
-      const response = await UserServices.getUsers()
-      this.users = response.data
-      console.log(this.users[0].pass)
-    },
     async loginHandler(){
       if (this.formValues.mail === '' || this.formValues.pass === ''){
         alert("Complete todos los campos por favor")
       }else {
         const response = await UserServices.matchUser(this.formValues);
-        console.log(response.data);
         switch (response.data) {
           case 0:
             alert("Usuario no encontrado")
@@ -107,9 +100,9 @@ export default {
             alert("Contraseña incorrecta")
             break
           default:
-            // location.href='compromisos'
-            this.academico =await AcademicoServices.getAcademico(response.data)
-            console.log(this.academico.data)
+            location.href='compromisos'
+            // this.academico =await AcademicoServices.getAcademico(response.data)
+            // console.log(this.academico.data)
             break
 
         }

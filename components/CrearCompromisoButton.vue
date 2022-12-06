@@ -74,7 +74,7 @@ export default {
         tipo: this.tipo,
       }
       axios.post('/compromisos', compromisoPost).then((result) => {
-        console.log(result)
+        window.location.reload();
       })
     },
   },
