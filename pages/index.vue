@@ -70,12 +70,14 @@
 
 <script>
 import UserServices from "~/services/UserServices";
+import AcademicoServices from "~/services/AcademicoServices";
 export default {
   name: 'IndexPage',
   layout: 'empty',
   data(){
     return{
       users: [],
+      academico:'',
       formValues: {
         pass: '',
         mail: ''
@@ -105,7 +107,11 @@ export default {
             alert("Contraseña incorrecta")
             break
           default:
-            location.href='compromisos'
+            // location.href='compromisos'
+            this.academico =await AcademicoServices.getAcademico(response.data)
+            console.log(this.academico.data)
+            break
+
         }
       }
     }

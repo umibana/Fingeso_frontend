@@ -67,7 +67,7 @@ export default {
     },
     upload() {
       if (!this.currentFile) {
-        this.message = 'Please select a file!'
+        this.message = 'Por favor elija un archivo!'
         return
       }
 
@@ -85,7 +85,7 @@ export default {
         })
         .catch(() => {
           this.progress = 0
-          this.message = 'Could not upload the file!'
+          this.message = 'No se pudo subir el archivo!'
           this.currentFile = undefined
         })
     },
