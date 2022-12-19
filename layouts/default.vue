@@ -68,8 +68,10 @@
 </template>
 
 <script>
+
 export default {
   name: 'DefaultLayout',
+  components: {},
   data() {
     return {
       clipped: false,
@@ -79,7 +81,7 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Inicio',
-          to: '/',
+          to: '/inicio',
         },
         {
           icon: 'mdi-apps',

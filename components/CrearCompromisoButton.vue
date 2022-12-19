@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" persistent>
     <template #activator="{ on, attrs }">
-      <v-btn color="primary" dark v-bind="attrs" v-on="on">
+      <v-btn :to = "to" color="primary" dark v-bind="attrs" v-on="on">
         Crear Compromiso</v-btn
       >
     </template>
@@ -55,6 +55,7 @@
 
 <script>
 import axios from 'axios'
+import {mapGetters,mapActions} from "vuex";
 export default {
   data: () => ({
     select: { text: 'Docencia', value: 0 },
@@ -66,15 +67,21 @@ export default {
     dialog: false,
     descripcion: '',
     tipo: 0,
+    to: '/compromisos'
   }),
+  computed:{
+    ...mapGetters('sesion',['getIdUser','getType','getInfo','getView'])
+  },created() {
+  },
   methods: {
+    ...mapActions('sesion', ['setState','changeView']),
     createCompromiso: function () {
       const compromisoPost = {
         descripcion: this.descripcion,
         tipo: this.tipo,
       }
       axios.post('/compromisos', compromisoPost).then((result) => {
-        window.location.reload();
+        alert("Compromiso creado con exito")
       })
     },
   },

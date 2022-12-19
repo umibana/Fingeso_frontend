@@ -10,8 +10,11 @@
 </template>
 
 <script>
+import UploadFile from "~/components/UploadFile.vue";
+
 export default {
   name: 'CompromisoComponente',
+  components: {UploadFile},
   props: {
     descripcion: {
       type: String,

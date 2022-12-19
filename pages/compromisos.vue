@@ -18,21 +18,30 @@
 <!-- Esto despues debera leer del backend -->
 <script>
 import axios from 'axios'
+import {mapGetters,mapActions} from "vuex";
+import CrearCompromisoButton from "~/components/CrearCompromisoButton.vue";
+import CompromisoDatos from "~/components/CompromisoDatos.vue";
 axios.defaults.baseURL = 'http://localhost:8080'
 export default {
+  components: {CrearCompromisoButton,CompromisoDatos},
   data: function () {
     return {
       compromisos: [],
     }
   },
+  computed:{
+    ...mapGetters('sesion',['getIdUser','getType','getInfo'])
+  },
   created: function () {
     this.getCompromisos()
   },
   methods: {
+    ...mapActions('sesion',['setState']),
     getCompromisos: async function () {
-      const response = await axios.get('/compromisos')
-      this.compromisos = response.data
+      console.log(this.getType)
+      const response = await axios.get('/Compromiso/Academico/'+this.getIdUser);
+      this.compromisos = response.data;
     },
-  },
+  }
 }
 </script>
