@@ -61,8 +61,8 @@ export default {
     select: { text: 'Docencia', value: 0 },
     items: [
       { text: 'Docencia', value: 0 },
-      { text: 'Investigación', value: 1 },
-      { text: 'Vinculación con el medio', value: 2 },
+      { text: 'Vinculación con el medio', value: 1 },
+      { text: 'Investigación', value: 2 },
     ],
     dialog: false,
     descripcion: '',
@@ -79,9 +79,16 @@ export default {
       const compromisoPost = {
         descripcion: this.descripcion,
         tipo: this.tipo,
+        academico:{
+          id: this.getInfo.id
+        }
       }
       axios.post('/compromisos', compromisoPost).then((result) => {
-        alert("Compromiso creado con exito")
+        console.log(result)
+        if (result.data === "")
+          alert("Se superó el limite de compromisos, no se creó el nuevo compromiso")
+        else
+          alert("Compromiso creado con exito")
       })
     },
   },

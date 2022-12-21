@@ -93,8 +93,8 @@ export default {
             this.user = this.getIdUser;
             this.rol = this.getType;
             this.academico = this.getInfo;
-            this.changeView(false);
-            // location.assign('compromisos');
+            //this.changeView(false);
+            location.assign('default');
             break
         }
       }

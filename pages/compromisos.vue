@@ -34,14 +34,17 @@ export default {
   },
   created: function () {
     this.getCompromisos()
+    setInterval(()=>{
+      this.getCompromisos()
+    },3000)
   },
   methods: {
     ...mapActions('sesion',['setState']),
     getCompromisos: async function () {
-      console.log(this.getType)
-      const response = await axios.get('/Compromiso/Academico/'+this.getIdUser);
+      const response = await axios.get('/compromisos/'+this.getIdUser);
       this.compromisos = response.data;
     },
+
   }
 }
 </script>
