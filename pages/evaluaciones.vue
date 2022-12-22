@@ -11,7 +11,10 @@
           <compromisos-evaluador :academico ="evaluado.id"></compromisos-evaluador>
           <v-btn @click="showModal = false" style="margin-top: 10px" color="#00447C">Close</v-btn>
         </div>
-        <v-btn v-if="getType === 'DECANO'" color="#EC8325">Finalizar evaluacion</v-btn>
+        <v-btn v-if="getType === 'DECANO'" @click="finalizarEvaluacion(evaluado.user.id)" color="#EC8325">Finalizar evaluacion</v-btn>
+        <div v-if="getViewForm" class="modal">
+          <EvaluationForm></EvaluationForm>
+        </div>
       </v-card>
     </v-card>
     <v-card light v-if="evaluados.length === 0" >
@@ -24,29 +27,47 @@
 import {mapGetters,mapActions} from "vuex";
 import ComiteServices from "~/services/ComiteServices";
 import compromisosEvaluador from "~/pages/compromisosEvaluador.vue";
+import EvaluationForm from "~/components/EvaluationForm.vue";
 export default {
   name: "Evaluaciones",
-  components: {compromisosEvaluador},
+  components: {EvaluationForm, compromisosEvaluador},
   data() {
     return {
       evaluados: [{
         id: BigInt,
         name: String,
-        tipoGrado: String
+        tipoGrado: String,
+        user:{
+          id: BigInt,
+          pass: String,
+          mail: String
+        }
       }],
-      showModal: false
+      showModal: false,
+      showForm: false,
     }
   },
   computed:{
-    ...mapGetters('sesion',['getIdUser','getType','getInfo','getView'])
+    ...mapGetters('sesion',['getIdUser','getType','getInfo','getView']),
+    ...mapGetters('form', ['getViewForm','getIdAcademico'])
   },created() {
-    this.obtenerEvaluados()
+    this.obtenerEvaluados();
+      setInterval(()=>{
+        this.obtenerEvaluados()
+      },3000)
   },
   methods:{
     ...mapActions('sesion', ['setState','changeView']),
+    ...mapActions('form',['changeFormView','changeIdAcademico']),
     obtenerEvaluados: async function(){
       const response = await ComiteServices.getEvaluados({id:this.getInfo.id})
       this.evaluados = response.data;
+    },
+    finalizarEvaluacion(idAcademico){
+      console.log(idAcademico);
+      this.changeIdAcademico(idAcademico);
+      console.log(this.getIdAcademico);
+      this.changeFormView(true);
     }
   }
 

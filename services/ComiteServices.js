@@ -6,5 +6,8 @@ export default {
   },
   getEvaluados(data){
     return Api().put('Comite/Evaluados',data);
+  },
+  deleteComite(id){
+    return Api().delete('/Comite/'+id)
   }
 }
